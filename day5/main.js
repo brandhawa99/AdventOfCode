@@ -23,10 +23,12 @@ async function organizeContainers() {
   rl.on("line", (line) => {
     line = line.replace(/[a-z]/gi, "");
     line = line.split(" ");
+    let val = [];
     for (let i = 0; i < +line[1]; i++) {
-      let val = containers[+line[3] - 1].pop();
-      containers[+line[5] - 1].push(val);
+      val.push(containers[+line[3] - 1].pop());
     }
+    val = val.reverse();
+    containers[+line[5] - 1].push(...val);
   });
   await event.once(rl, "close");
   let holder = [];
